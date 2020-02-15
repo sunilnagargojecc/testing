@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	
+    <title></title>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/styles.css">
+	<link rel="icon" type="image/png" href="/favicon.ico" />
+	<style>
+.accordion {
+ 
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  color: blue; 
+  
+}
+
+.panel {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+}
+</style>
+	
+    <script type="text/javascript" src="js/require.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            var config = {
+                baseUrl: 'js'
+            };
+
+            var dependencies = [
+                'customActivity'
+            ];
+
+            require(config, dependencies);
+        })();
+    </script>
+	
+	
+</head>
+
+<body>
+    <h3><center>SENDING SMS FILE TO ICS</center></h3>
+<form id="myform" >
+<button type="button" class="accordion">File Name</button>
+<div class="panel">
+  <p><input type="text" name="filename" id="fn_name" style="border: 2px solid lightblue; border-radius: 5px;">
+  </p>
+</div>
+
+<button type="button" class="accordion">Source DE </button>
+<div class="panel">
+  <p><input type="text" name="sourcename" id="sr_de" style="border: 2px solid lightblue; border-radius: 5px;"></p>
+</div>
+
+<button type="button" class="accordion">Sender Name</button>
+<div class="panel">
+  <p><input type="text" name="sendername" id="sn_name" style="border: 2px solid lightblue; border-radius: 5px;"></p>
+</div>
+
+<button type="button" class="accordion">Message</button>
+<div class="panel">
+  <p><textarea name="msg" id="msgg" rows="5" col="10" style="border: 2px solid lightblue; border-radius: 5px;">Enter text here...</textarea></p>
+  
+</div>
+
+<div align="right">
+<p>
+  <input id="submit" type="submit" name="submit" onclick="send();" value="Submit">
+</p>
+</div>
+</form>
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+	  
+    }
+  });
+}
+
+function send() {
+document.getElementById("myform").action = "https://freshactivity.herokuapp.com/example";
+document.getElementById("myform").method="POST";
+  var fn = document.getElementById('fn_name').value;
+  var src = document.getElementById('sr_de').value;
+  var sn = document.getElementById('sn_name').value;
+  var msg = document.getElementById('msgg').value;
+  console.log("enter"+fn+" "+src+" "+sn+" "+msg+" ");
+}
+</script>
+</body>
+
+</html>
